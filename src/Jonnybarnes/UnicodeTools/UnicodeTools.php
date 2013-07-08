@@ -3,11 +3,24 @@
 namespace Jonnybarnes\UnicodeTools;
 
 class UnicodeTools {
+		/**
+		 * This is a callback that parses a string for any occurence of
+		 * \uXXXXX\ - a unicode codepoint, and then calls the utf8CPtoHex
+		 * function output the raw unicode character
+		 *
+		 * @returns string
+		 */
 	public function convertUnicodeCodepoints($input) {
 		$output = preg_replace_callback('/\\\\u([0-9a-f]{4,5}\\\\)/i', 'self::utf8CPtoHex', $input);
 		return $output;
 	}
 
+	/**
+	 * This takes a codepoint of the form \uXXXX(X)\ and uses
+	 * PHP's chr() function to ouptput a raw UTF-8 encoded character
+	 *
+	 * @returns string
+	 */
 	public function utf8CPtoHex($cp) {
 		$num = $cp[1];
 		$num = '0x' . $num;
