@@ -1,5 +1,5 @@
 {
-    "name": "jonnybanres/unicode-tools",
+    "name": "jonnybarnes/unicode-tools",
     "type": "library",
     "description": "Turns Unicode codepoints into raw utf-8 multibyte characters",
     "keywords": ["unicode", "utf-8"],
