@@ -11,7 +11,7 @@ class UnicodeTools {
 		 * @returns string
 		 */
 	public function convertUnicodeCodepoints($input) {
-		$output = preg_replace_callback('/\\\\u([0-9a-f]{4,5}\\\\)/i', 'self::utf8CPtoHex', $input);
+		$output = preg_replace_callback('/\\\\u([0-9a-fA-F]{4,6}\\\\)/i', 'self::utf8CPtoHex', $input);
 		return $output;
 	}
 
@@ -46,7 +46,7 @@ class UnicodeTools {
 			$utf8hex = chr('0x' . base_convert($returnbin1, 2 ,16)) . chr('0x' . base_convert($returnbin2, 2, 16)) . chr('0x' . base_convert($returnbin3, 2, 16));
 			return $utf8hex;
 		}
-		if($num <= 0x1FFFFF) { //U+10000 - U+10FFF -- 4 bytes
+		if($num <= 0x10FFFF) { //U+10000 - U+10FFFF -- 4 bytes
 			$bin = str_pad($bin, 21, "0", STR_PAD_LEFT);
 			$bin1 = substr($bin, 0, 3); $returnbin1 = '11110' . $bin1;
 			$bin2 = substr($bin, 3, 6); $returnbin2 = '10' . $bin2;
@@ -54,6 +54,9 @@ class UnicodeTools {
 			$bin4 = substr($bin, 15); $returnbin4 = '10' . $bin4;
 			$utf8hex = chr('0x' . base_convert($returnbin1, 2, 16)) . chr('0x' . base_convert($returnbin2, 2, 16)) . chr('0x' . base_convert($returnbin3, 2, 16)) . chr('0x' . base_convert($returnbin4, 2, 16));
 			return $utf8hex;
+		}
+		if($num >= 0x110000) { //U+110000 -- invalid UTF-8 character
+			throw new Exception('Codepoint maps to invalid Unicode character');
 		}
 	}
 }
