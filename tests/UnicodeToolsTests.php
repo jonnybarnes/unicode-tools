@@ -27,7 +27,7 @@ class UnicodeToolsTest extends PHPUnit_Framework_TestCase {
 	public function testAstral()
 	{
 		$actual = $this->u->convertUnicodeCodepoints('White Star: \\u2606\\, MUSICAL SYMBOL G CLEF: \\u1D11E\\');
-		$expected = 'White star: ☆, MUSICAL SYMBOL G CLEF: 𝄞';
+		$expected = 'White Star: ☆, MUSICAL SYMBOL G CLEF: 𝄞';
 
 		$this->assertEquals($actual, $expected);
 
