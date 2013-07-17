@@ -39,6 +39,6 @@ class UnicodeToolsTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testInvalid()
 	{
-		$this->u->convertUnicodeCodepoints('\\u10FFFFF\\');
+		$this->u->convertUnicodeCodepoints('\\u110000\\');
 	}
 }

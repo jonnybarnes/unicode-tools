@@ -56,7 +56,7 @@ class UnicodeTools {
 			return $utf8hex;
 		}
 		if($num >= 0x110000) { //U+110000 -- invalid UTF-8 character
-			throw new Exception('Codepoint maps to invalid Unicode character');
+			throw new \Exception('Codepoint maps to invalid Unicode character');
 		}
 	}
 }
